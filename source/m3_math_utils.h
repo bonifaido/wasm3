@@ -170,7 +170,7 @@ u64 rotr64(u64 n, unsigned c) {
 
 #define OP_DIV_U(RES, A, B)                                      \
     if (M3_UNLIKELY(B == 0)) newTrap (m3Err_trapDivisionByZero);    \
-    RES = A / B;
+    RES = div_u64(A, B);
 
 #define OP_REM_U(RES, A, B)                                      \
     if (M3_UNLIKELY(B == 0)) newTrap (m3Err_trapDivisionByZero);    \
@@ -184,7 +184,7 @@ u64 rotr64(u64 n, unsigned c) {
         if (M3_UNLIKELY(B == -1 && A == TYPE_MIN)) {                \
             newTrap (m3Err_trapIntegerOverflow);                  \
         }                                                         \
-        RES = A / B;
+        RES = div_s64(A, B);
 
     #define OP_REM_S(RES, A, B, TYPE_MIN)                         \
         if (M3_UNLIKELY(B == 0)) newTrap (m3Err_trapDivisionByZero); \
