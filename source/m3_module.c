@@ -34,6 +34,8 @@ void  m3_FreeModule  (IM3Module i_module)
         m3_Free (i_module->funcTypes);
         m3_Free (i_module->dataSegments);
         m3_Free (i_module->table0);
+        m3_Free (i_module->table0ExportName);
+        m3_Free (i_module->memoryExportName);
 
         u32 i;
         for (i = 0; i < i_module->numGlobals; ++i)
@@ -42,6 +44,8 @@ void  m3_FreeModule  (IM3Module i_module)
             FreeImportInfo(&(i_module->globals[i].import));
         }
         m3_Free (i_module->globals);
+
+        FreeImportInfo(&(i_module->memoryImport));
 
         m3_Free (i_module);
     }
