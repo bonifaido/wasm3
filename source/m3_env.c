@@ -1046,13 +1046,30 @@ _   (checkStartFunction(i_function->module))
     u32 i;
     for (i = 0; i < ftype->numArgs; ++i)
     {
-        switch (d_FuncArgType(ftype, i)) {
-        case c_m3Type_i32:  kstrtoul(i_argv[i], 10, (unsigned long*)(s));  s += 8; break;
-        case c_m3Type_i64:  kstrtoull(i_argv[i], 10, (u64*)(s)); s += 8; break;
-# if d_m3HasFloat
-        return "float arguments are not supported";
-        // case c_m3Type_f32:  *(f32*)(s) = strtod(i_argv[i], NULL);       s += 8; break;  // strtof would be less portable
-        // case c_m3Type_f64:  *(f64*)(s) = strtod(i_argv[i], NULL);       s += 8; break;
+        switch (d_FuncArgType(ftype, i))
+        {
+        case c_m3Type_i32:
+        {
+            int res = kstrtoul(i_argv[i], 10, (unsigned long *)(s));
+            if (res < 0) {
+                return m3Err_argumentTypeMismatch;
+            }
+        
+            s += 8;
+            break;
+        }
+        case c_m3Type_i64:
+        {    int res = kstrtoull(i_argv[i], 10, (u64 *)(s));
+            if (res < 0) {
+                return m3Err_argumentTypeMismatch;
+            }
+            s += 8;
+            break;
+        }
+#if d_m3HasFloat
+            return "float arguments are not supported";
+            // case c_m3Type_f32:  *(f32*)(s) = strtod(i_argv[i], NULL);       s += 8; break;  // strtof would be less portable
+            // case c_m3Type_f64:  *(f64*)(s) = strtod(i_argv[i], NULL);       s += 8; break;
 # endif
         default: return "unknown argument type";
         }

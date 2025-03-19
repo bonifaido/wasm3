@@ -370,7 +370,7 @@ _       (ReadLEB_u32 (& size, & i_bytes, i_end));
 
         if (size)
         {
-            const u8 * ptr = i_bytes;
+            const u8 * ptr __maybe_unused = i_bytes;
             i_bytes += size;
 
             if (i_bytes <= i_end)

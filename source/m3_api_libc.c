@@ -31,7 +31,7 @@ m3ApiRawFunction(m3_libc_abort)
 
 m3ApiRawFunction(m3_libc_exit)
 {
-    m3ApiGetArg     (int32_t, code)
+    m3ApiGetArg     (int32_t __maybe_unused, code)
 
     m3ApiTrap(m3Err_trapExit);
 }
