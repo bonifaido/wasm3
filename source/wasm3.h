@@ -15,6 +15,7 @@
 
 #ifdef __KERNEL__
 #include <linux/module.h>
+#include <linux/mm.h>
 #include <linux/slab.h>
 #define printf printk
 #define PRIi32 "i"
