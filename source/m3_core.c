@@ -144,7 +144,7 @@ void *  m3_Realloc_Impl  (void * i_ptr, size_t i_newSize, size_t i_oldSize)
 #if LINUX_VERSION_CODE < KERNEL_VERSION(6, 12, 0)
     void *newPtr = kvrealloc(i_ptr, i_oldSize, i_newSize, GFP_KERNEL);
 #else
-    void *newPtr = kvrealloc(i_ptr, i_oldSize, GFP_KERNEL);
+    void *newPtr = kvrealloc(i_ptr, i_newSize, GFP_KERNEL);
 #endif
 
     if (M3_LIKELY(newPtr))
